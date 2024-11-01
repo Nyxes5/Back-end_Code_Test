@@ -33,3 +33,9 @@ You can now run the development server:
 ```bash
 python manage.py runserver
 ```
+
+You can run the tests with:
+
+```bash
+python manage.py test
+```
