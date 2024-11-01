@@ -1,6 +1,13 @@
 # Back-end Code Test
+## Walkthrough
 
-# Getting Started
+API Documentation using swagger at ``/docs``
+Django admin panel (superuser needed) at ``/admin``
+Django Rest Framework at ``/api``
+
+You can use both Swagger and/or Django Rest Framework to use GET/POST request without a front-end. 
+
+## Getting Started
 
 (Optional) Build and activate the virtualenv for your project.
 

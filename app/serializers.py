@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models  import Person
 
+
 class PersonSerializer(serializers.ModelSerializer):
     class Meta():
         model = Person
@@ -8,6 +9,9 @@ class PersonSerializer(serializers.ModelSerializer):
         read_only_fields = ('id',)
 
     def validate_age(self, value):
+        """
+        A person has to be 18+ years old
+        """
         if value < 18:
             raise serializers.ValidationError("person has to be older than 18.")
         return value
