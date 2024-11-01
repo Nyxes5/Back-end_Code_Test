@@ -1,5 +1,5 @@
 from django.core.cache import cache
-from .models import Person
+from .repositories import get_persons
 import logging
 
 logger = logging.getLogger('cache')
@@ -13,7 +13,7 @@ def get_or_cache_persons():
     result = cache.get(CACHE_KEY_PERSON, None)
     if not result:
         logger.info('Fetching persons from database and setting cache') # This is for development purposes only
-        result = Person.objects.all().order_by("name")
+        result = get_persons()
         cache.set(CACHE_KEY_PERSON, result, 60)
     return result
 
