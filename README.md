@@ -16,14 +16,14 @@ You can use both Swagger and/or Django Rest Framework to use GET/POST request wi
 
 ### Create Person
 
-You can create a person using POST request to ``/api/persons`` with a body:
+You can create a person using POST request to ``/api/person`` with a body:
 |Field|Type|Description|
 |-|-|-|
 |name|Charfield|The person's name. Must be unique.|
 |age|PositiveIntegerField|The person's age in years, as a positive integer. Must be 18+.|
 
 ### Search Person
-You can search a person using GET request to ``/api/persons?search=<search>``.
+You can search a person using GET request to ``/api/person?search=<search>``.
 You can search on either name or age and it doesn't have to be a perfect match as long as the search term is a substring of name or age.
 
 ## Getting Started

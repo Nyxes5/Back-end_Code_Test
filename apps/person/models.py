@@ -10,3 +10,6 @@ class Person(models.Model):
     age = models.PositiveIntegerField(
         help_text="The person's age in years, as a positive integer. Must be 18+."
     )
+
+    def __str__(self):
+        return self.name

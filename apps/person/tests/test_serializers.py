@@ -1,5 +1,5 @@
 from django.test import TestCase
-from app.serializers import PersonSerializer
+from apps.person.serializers import PersonSerializer
 
 
 class PersonSerializerTest(TestCase):

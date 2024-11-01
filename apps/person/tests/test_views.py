@@ -1,6 +1,6 @@
 from rest_framework.test import APITestCase
 from rest_framework import status
-from app.models import Person
+from apps.person.models import Person
 
 
 class PersonAPITest(APITestCase):
@@ -18,7 +18,7 @@ class PersonAPITest(APITestCase):
         """
         Test GET Request
         """
-        response = self.client.get("/api/persons")
+        response = self.client.get("/api/person")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 4)
 
@@ -26,7 +26,7 @@ class PersonAPITest(APITestCase):
         """
         Test GET Search Request on name
         """
-        response = self.client.get("/api/persons?search=jef")
+        response = self.client.get("/api/person?search=jef")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 1)
         self.assertEqual(response.data[0]["name"], self.person1.name)
@@ -36,7 +36,7 @@ class PersonAPITest(APITestCase):
         """
         Test GET Search Request on age
         """
-        response = self.client.get("/api/persons?search=19")
+        response = self.client.get("/api/person?search=19")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 2)
 
@@ -44,7 +44,7 @@ class PersonAPITest(APITestCase):
         """
         Test GET Search Request on a number that's included in age
         """
-        response = self.client.get("/api/persons?search=1")
+        response = self.client.get("/api/person?search=1")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 3)
 
@@ -52,7 +52,7 @@ class PersonAPITest(APITestCase):
         """
         Test GET Search Request on a letter that's included in name
         """
-        response = self.client.get("/api/persons?search=r")
+        response = self.client.get("/api/person?search=r")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 2)
 
@@ -61,13 +61,13 @@ class PersonAPITest(APITestCase):
         Test POST Request
         """
         payload = {"name": "Andy", "age": 20}
-        response = self.client.post("/api/persons", data=payload)
+        response = self.client.post("/api/person", data=payload)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(response.data["name"], payload["name"])
         self.assertEqual(response.data["age"], payload["age"])
 
         # Check if it created
-        response = self.client.get("/api/persons")
+        response = self.client.get("/api/person")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 5)
 
@@ -76,11 +76,11 @@ class PersonAPITest(APITestCase):
         Test POST Request fail on duplicate name
         """
         payload = {"name": "Charlie", "age": 21}
-        response = self.client.post("/api/persons", data=payload)
+        response = self.client.post("/api/person", data=payload)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
         # Check if it didn't create
-        response = self.client.get("/api/persons")
+        response = self.client.get("/api/person")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 5)
 
@@ -89,10 +89,10 @@ class PersonAPITest(APITestCase):
         Test POST Request fail on below 18 years old
         """
         payload = {"name": "Oscar", "age": 15}
-        response = self.client.post("/api/persons", data=payload)
+        response = self.client.post("/api/person", data=payload)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
         # Check if it didn't create
-        response = self.client.get("/api/persons")
+        response = self.client.get("/api/person")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 5)
