@@ -26,6 +26,10 @@ You can create a person using POST request to ``/api/person`` with a body:
 You can search a person using GET request to ``/api/person?search=<search>``.
 You can search on either name or age and it doesn't have to be a perfect match as long as the search term is a substring of name or age.
 
+### Get Person By Name
+You can get a person by name using GET request to ``/api/person/by_name/<name>``.
+This has to be an exact match. If person is not found, it will raise HTTP 404 Not Found.
+
 ## Getting Started
 
 (Optional) Build and activate the virtualenv for your project.

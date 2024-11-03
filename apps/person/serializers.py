@@ -15,3 +15,11 @@ class PersonSerializer(serializers.ModelSerializer):
         if value < 18:
             raise serializers.ValidationError("person has to be older than 18.")
         return value
+    
+    def validate_name(self, value):
+        """
+        A person can't have the same name in case insensitive
+        """
+        if Person.objects.filter(name__iexact=value).first():
+            raise serializers.ValidationError("person's name has to be unique.")
+        return value
