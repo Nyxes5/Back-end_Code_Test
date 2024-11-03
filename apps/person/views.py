@@ -36,6 +36,8 @@ class PersonViewSet(
 
 class PersonByNameView(GenericAPIView):
 
+    serializer_class = PersonSerializer
+
     def get(self, request, *args, **kwargs):
         """
         Get a person by exact (case insensitive) name or raise 404 Not Found
@@ -43,6 +45,6 @@ class PersonByNameView(GenericAPIView):
         name = kwargs.get("name")
         person = get_or_cache_person_by_name(name)
         if person:
-            serializer = PersonSerializer(get_or_cache_person_by_name(name))
+            serializer = PersonSerializer(person)
             return JsonResponse(serializer.data)
         raise Http404
