@@ -12,7 +12,7 @@ def get_or_cache_persons():
     """
     result = cache.get(CACHE_KEY_PERSON, None)
     if not result:
-        logger.info('Fetching persons from database and setting cache') # This is for development purposes only
+        logger.info('Fetching persons from database and setting cache')
         result = get_persons()
         cache.set(CACHE_KEY_PERSON, result, 60) # Cache time can be set to different value
     return result
@@ -21,7 +21,7 @@ def clear_persons_cache():
     """
     Clear the cache
     """
-    logger.info('Deleting persons from cache') # This is for development purposes only
+    logger.info('Deleting persons from cache')
     cache.delete(CACHE_KEY_PERSON)
 
 def get_or_cache_person_by_name(name):
@@ -30,7 +30,7 @@ def get_or_cache_person_by_name(name):
     """
     result = cache.get(name, None)
     if not result:
-        logger.info(f'Fetching person { name } from database and setting cache') # This is for development purposes only
+        logger.info(f'Fetching person { name } from database and setting cache')
         result = get_person_by_name(name)
         if result:
             cache.set(name, result, 60) # Cache time can be set to different value

@@ -18,7 +18,7 @@ class PersonSerializer(serializers.ModelSerializer):
     
     def validate_name(self, value):
         """
-        A person can't have the same name in case insensitive
+        A person can't have the same name (case insensitive)
         """
         if Person.objects.filter(name__iexact=value).first():
             raise serializers.ValidationError("person's name has to be unique.")
